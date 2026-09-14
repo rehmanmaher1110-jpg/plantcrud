@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Beautiful Flowers</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3faf1;
+            color: #174d27;
+            overflow-x: hidden;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 300px;
+            padding: 45px 20px 55px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 15% 20%, #ffffff 0%, transparent 25%),
+                radial-gradient(circle at 85% 25%, #dff5cf 0%, transparent 30%),
+                linear-gradient(135deg, #eef9e9, #f9fff7);
+
+            border-bottom-left-radius: 50% 30px;
+            border-bottom-right-radius: 50% 30px;
+        }
+
+        .hero::before {
+            content: "🍃";
+            position: absolute;
+            left: 5%;
+            top: 25px;
+            font-size: 75px;
+            opacity: 0.65;
+            animation: floatingLeaf 4s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: "🌿";
+            position: absolute;
+            right: 5%;
+            top: 35px;
+            font-size: 75px;
+            opacity: 0.65;
+            animation: floatingLeaf 5s ease-in-out infinite reverse;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 58px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #1d632d;
+            animation: headingDown 1s ease forwards;
+        }
+
+        .hero h1 span {
+            color: #3c9b43;
+        }
+
+        .flower-line {
+            width: 150px;
+            height: 2px;
+            background: #76a96b;
+            margin: 22px auto;
+            position: relative;
+        }
+
+        .flower-line::after {
+            content: "🌸";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #f3faf1;
+            padding: 0 10px;
+            font-size: 20px;
+        }
+
+        .booking {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 15px 45px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #23843a, #319a48);
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(35, 132, 58, 0.3);
+            transition: all 0.4s ease;
+            animation: buttonAppear 1.2s ease forwards;
+        }
+
+        .booking:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 16px 30px rgba(35, 132, 58, 0.4);
+        }
+
+        /* ================= CARDS ================= */
+
+        .plants-container {
+            max-width: 1200px;
+            margin: 35px auto 80px;
+            padding: 10px 25px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 38px;
+        }
+
+        .plant-card {
+            position: relative;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+
+            box-shadow:
+                0 12px 30px rgba(31, 91, 42, 0.13);
+
+            border: 4px solid white;
+
+            opacity: 0;
+
+            animation: cardEntrance 0.8s ease forwards;
+
+            transition:
+                transform 0.45s ease,
+                box-shadow 0.45s ease;
+        }
+
+        .plant-card:nth-child(1) {
+            animation-delay: 0.15s;
+        }
+
+        .plant-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .plant-card:nth-child(3) {
+            animation-delay: 0.45s;
+        }
+
+        .plant-card:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .plant-card:nth-child(5) {
+            animation-delay: 0.75s;
+        }
+
+        .plant-card:nth-child(6) {
+            animation-delay: 0.9s;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-15px);
+            box-shadow:
+                0 25px 45px rgba(31, 91, 42, 0.25);
+        }
+
+        /* ================= IMAGE ================= */
+
+        .image-box {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .plant-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+
+            transition:
+                transform 0.8s ease,
+                filter 0.5s ease;
+        }
+
+        .plant-card:hover img {
+            transform: scale(1.12);
+            filter: brightness(1.08);
+        }
+
+        /* ================= LEAF BADGE ================= */
+
+        .leaf-badge {
+            position: absolute;
+            top: 225px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: white;
+            border-radius: 50%;
+
+            font-size: 25px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .plant-card:hover .leaf-badge {
+            transform: translateX(-50%) rotate(15deg) scale(1.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ================= CONTENT ================= */
+
+        .card-content {
+            padding: 35px 22px 25px;
+            text-align: center;
+        }
+
+        .card-content h2 {
+            margin: 0 0 12px;
+            font-size: 23px;
+            color: #17602c;
+
+            transition:
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .plant-card:hover .card-content h2 {
+            color: #24943f;
+            transform: scale(1.04);
+        }
+
+        .card-content p {
+            margin: 0;
+            color: #4e5e54;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* ================= CARD BOTTOM LINE ================= */
+
+        .plant-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            width: 100%;
+            height: 5px;
+
+            background: linear-gradient(
+                90deg,
+                #55b94d,
+                #8bdc70
+            );
+
+            transform: scaleX(0);
+            transform-origin: left;
+
+            transition: transform 0.5s ease;
+        }
+
+        .plant-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Different colors */
+
+        .plant-card:nth-child(2)::after {
+            background: linear-gradient(90deg, #ff6fae, #ff9bc5);
+        }
+
+        .plant-card:nth-child(3)::after {
+            background: linear-gradient(90deg, #2196f3, #6ec6ff);
+        }
+
+        .plant-card:nth-child(4)::after {
+            background: linear-gradient(90deg, #ffc107, #ffe082);
+        }
+
+        .plant-card:nth-child(5)::after {
+            background: linear-gradient(90deg, #9c4dcc, #d08cff);
+        }
+
+        .plant-card:nth-child(6)::after {
+            background: linear-gradient(90deg, #16a085, #48d1b0);
+        }
+
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes headingDown {
+
+            from {
+                opacity: 0;
+                transform: translateY(-45px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes buttonAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        @keyframes cardEntrance {
+
+            from {
+                opacity: 0;
+                transform: translateY(60px) scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        @keyframes floatingLeaf {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(15px) rotate(8deg);
+            }
+
+        }
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 950px) {
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .plants-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 35px 15px 45px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero::before,
+            .hero::after {
+                font-size: 45px;
+            }
+
+            .booking {
+                font-size: 19px;
+                padding: 13px 32px;
+            }
+
+            .plants-container {
+                grid-template-columns: 1fr;
+                padding: 10px 20px;
+                gap: 30px;
+            }
+
+            .image-box {
+                height: 260px;
+            }
+
+            .leaf-badge {
+                top: 235px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <h1>
+            🌿 Our <span>Beautiful</span> Flowers 🌿
+        </h1>
+
+        <div class="flower-line"></div>
+
+        <a href="#flowers" class="booking">
+            🌿 Booking Now
+        </a>
+
+    </section>
+
+
+    <!-- FLOWERS -->
+
+    <div class="plants-container" id="flowers">
+
+        {% for plant in plants %}
+
+        <div class="plant-card">
+
+            {% if plant.image %}
+
+            <div class="image-box">
+
+                <img
+                    src="{{ plant.image.url }}"
+                    alt="{{ plant.name }}"
+                >
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="leaf-badge">
+                🌿
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    {{ plant.name }}
+                </h2>
+
+                <p>
+                    {{ plant.description }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
